@@ -107,3 +107,22 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function findSpouse(personArray, people){
+  let spouse;
+  spouse = people.filter(function(el){
+    return personArray[0].id === el.currentSpouse
+    });
+    return spouse[0].firstName + " " + spouse[0].lastName;
+}
+
+function findKids(personArray, people){
+  let kids = people.filter(function(el){
+      for(let i = 0; i < personArray.length; i++){
+        for(let j = 0; j < el.parents.length; j++){
+          return personArray[i].id === el.parents[j];
+        }  
+      }
+  });
+  return kids;
+}
