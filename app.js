@@ -110,7 +110,6 @@ function chars(input){
 
 function findSpouse(personArray, people){
   let spouse;
-  //possibly need this in a for loop
   spouse = people.filter(function(el){
     return personArray[0].id === el.currentSpouse
     });
@@ -119,8 +118,10 @@ function findSpouse(personArray, people){
 
 function findKids(personArray, people){
   let kids = people.filter(function(el){
-      for(let i = 0; i < 2; i++){
-          return personArray[0].id === el.parents[i];
+      for(let i = 0; i < personArray.length; i++){
+        for(let j = 0; j < el.parents.length; j++){
+          return personArray[i].id === el.parents[j];
+        }  
       }
   });
   return kids;
