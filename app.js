@@ -44,6 +44,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
+    alert("Spouse: " + findSpouse(person, people));
     break;
     case "descendants":
     // TODO: get person's descendants
