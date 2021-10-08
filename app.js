@@ -5,6 +5,8 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
+let kidNameArray = [];
+
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -49,6 +51,7 @@ function mainMenu(person, people){
     case "descendants":
     // TODO: get person's descendants
     alert("Descendants: " + findKids(person, people));
+    kidNameArray = [];
     break;
     case "restart":
     app(people); // restart
@@ -128,8 +131,8 @@ function findSpouse(personArray, people){
     return spouse[0].firstName + " " + spouse[0].lastName;
 }
 
+
 function findKids(personArray, people){
-  let kidNameArray = [];
   let kids = people.filter(function(el){
       for(let i = 0; i < personArray.length; i++){
         for(let j = 0; j < el.parents.length; j++){
@@ -139,7 +142,14 @@ function findKids(personArray, people){
   });
 
   if(kids.length > 0){
-    kidNameArray = kids.push(kids[0].firstName + " " + kids.push(kids[0].lastName));
+    for(let i = 0; i < kids.length; i++){
+      if(i == kids.length - 1){
+        kidNameArray += kids[i].firstName + " " + kids[i].lastName + ".";
+      }
+      else{
+        kidNameArray += kids[i].firstName + " " + kids[i].lastName + ", ";
+      }
+    }
     return findKids(kids, people);
   }
   else if(kids.length === 0){
