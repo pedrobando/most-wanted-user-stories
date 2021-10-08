@@ -107,3 +107,12 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function findSpouse(personArray, people){
+  let spouse;
+  //possibly need this in a for loop
+  spouse = people.filter(function(el){
+    return personArray[0].id === el.currentSpouse
+    });
+    return spouse[0].firstName + " " + spouse[0].lastName;
+}
