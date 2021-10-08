@@ -116,3 +116,12 @@ function findSpouse(personArray, people){
     });
     return spouse[0].firstName + " " + spouse[0].lastName;
 }
+
+function findKids(personArray, people){
+  let kids = people.filter(function(el){
+      for(let i = 0; i < 2; i++){
+          return personArray[0].id === el.parents[i];
+      }
+  });
+  return kids;
+}
