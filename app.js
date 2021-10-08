@@ -139,12 +139,11 @@ function findKids(personArray, people){
   });
 
   if(kids.length > 0){
+    kidNameArray = kids.push(kids[0].firstName + " " + kids.push(kids[0].lastName));
     return findKids(kids, people);
   }
   else if(kids.length === 0){
-    for(let i = 0; i < kids.length; i++){
-      kidNameArray = kidNameArray.push(kids.firstName + " " + kidNameArray.push(kids.lastName)) ;
-    }
+ 
+      return kidNameArray;
   }
-  return kidNameArray;
 }
