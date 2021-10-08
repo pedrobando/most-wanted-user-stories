@@ -40,7 +40,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
-    alert(`${person[0].firstName} ${person[0].lastName}'s gender is ${person[0].gender}. ${person[0].firstName} was born on ${person[0].dob}. ${person[0].firstName}'s height is ${person[0].height}, weight is ${person[0].weight}, eye color is ${person[0].eyeColor}, and occupation is ${person[0].occupation}.`)
+    alert(`${person[0].firstName} ${person[0].lastName}'s gender is ${person[0].gender}. ${person[0].firstName} was born on ${person[0].dob}. ${person[0].firstName}'s height is ${person[0].height}, weight is ${person[0].weight}, eye color is ${person[0].eyeColor}, and occupation is ${person[0].occupation}.`);
     break;
     case "family":
     // TODO: get person's family
