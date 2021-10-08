@@ -48,6 +48,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
+    alert("Descendants: " + findKids(person, people));
     break;
     case "restart":
     app(people); // restart
@@ -118,6 +119,7 @@ function findSpouse(personArray, people){
 }
 
 function findKids(personArray, people){
+  let kidNameArray = [];
   let kids = people.filter(function(el){
       for(let i = 0; i < personArray.length; i++){
         for(let j = 0; j < el.parents.length; j++){
@@ -125,5 +127,14 @@ function findKids(personArray, people){
         }  
       }
   });
-  return kids;
+
+  if(kids.length > 0){
+    return findKids(kids, people);
+  }
+  else if(kids.length === 0){
+    for(let i = 0; i < kids.length; i++){
+      kidNameArray = kidNameArray.push(kids.firstName + " " + kidNameArray.push(kids.lastName)) ;
+    }
+  }
+  return kidNameArray;
 }
