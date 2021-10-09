@@ -5,6 +5,9 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
+let kidNameArray = [];
+let siblingsArray = [];
+
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -44,12 +47,13 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    alert("Spouse: " + findSpouse(person, people) + "\n");
-    alert("Siblings:" + findSiblings(person, people));
+    alert("Spouse: " + findSpouse(person, people) + "\n" + "Siblings:" + findSiblings(person, people));
+    
     break;
     case "descendants":
     // TODO: get person's descendants
     alert("Descendants: " + findKids(person, people));
+    kidNameArray = [];
     break;
     case "restart":
     app(people); // restart
@@ -129,8 +133,8 @@ function findSpouse(personArray, people){
     return spouse[0].firstName + " " + spouse[0].lastName;
 }
 
+
 function findKids(personArray, people){
-  let kidNameArray = [""];
   let kids = people.filter(function(el){
       for(let i = 0; i < personArray.length; i++){
         for(let j = 0; j < el.parents.length; j++){
@@ -140,11 +144,30 @@ function findKids(personArray, people){
   });
 
   if(kids.length > 0){
-    kidNameArray = kidNameArray.push(kids[0].firstName + " " + kids[0].lastName);
+    for(let i = 0; i < kids.length; i++){
+      if(i == kids.length - 1){
+        kidNameArray += kids[i].firstName + " " + kids[i].lastName + ".";
+      }
+      else{
+        kidNameArray += kids[i].firstName + " " + kids[i].lastName + ", ";
+      }
+    }
     return findKids(kids, people);
   }
   else{
  
       return kidNameArray;
   }
+}
+
+function findSiblings(siblings, people){
+  siblings = people.filter(function(si){
+    for( let i = 0; 1 < people.length; i++ ){
+      if(siblings[i].parents == people[i].parents){
+        siblingsArray += siblingsArray + si[i].firstName + " " + si[i].lastName;
+      }
+    }
+      
+  });
+  return siblingsArray
 }
