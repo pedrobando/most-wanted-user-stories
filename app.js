@@ -44,7 +44,8 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    alert("Spouse: " + findSpouse(person, people));
+    alert("Spouse: " + findSpouse(person, people) + "\n");
+    alert("Siblings:" + findSiblings(person, people));
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -129,7 +130,7 @@ function findSpouse(personArray, people){
 }
 
 function findKids(personArray, people){
-  let kidNameArray = [];
+  let kidNameArray = [""];
   let kids = people.filter(function(el){
       for(let i = 0; i < personArray.length; i++){
         for(let j = 0; j < el.parents.length; j++){
@@ -139,10 +140,10 @@ function findKids(personArray, people){
   });
 
   if(kids.length > 0){
-    kidNameArray = kids.push(kids[0].firstName + " " + kids.push(kids[0].lastName));
+    kidNameArray = kidNameArray.push(kids[0].firstName + " " + kids[0].lastName);
     return findKids(kids, people);
   }
-  else if(kids.length === 0){
+  else{
  
       return kidNameArray;
   }
