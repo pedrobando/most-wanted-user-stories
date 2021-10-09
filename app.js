@@ -144,6 +144,7 @@ function findSpouse(personArray, people){
 
 
 function findKids(personArray, people){
+  let genCounter = 0;
   for(let i = 0; i < personArray.length; i++){
       descendants = people.filter(function(el){
       return  el.parents.includes(personArray[i].id);
@@ -151,14 +152,15 @@ function findKids(personArray, people){
     if(descendants.length > 0){
       for(let i = 0; i < descendants.length; i++){
         allDescendantsBucket.push(descendants[i]);
+        genCounter++;
       }
     }
   }
    
-  if(descendants.length === 0){
+  if(genCounter === 0){
     return allDescendantsBucket;
   }
-  else if(descendants.length > 0){
+  else if(genCounter > 0){
     console.log(findKids(descendants, people));
     return findKids(descendants, people);
   }
