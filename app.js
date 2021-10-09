@@ -130,46 +130,55 @@ function findSpouse(personArray, people){
   spouse = people.filter(function(el){
     return personArray[0].id === el.currentSpouse
     });
+  
+  if(spouse.length === 0){
+    return "";
+  }
+  else{
     return spouse[0].firstName + " " + spouse[0].lastName;
+  }
+
 }
 
 
 function findKids(personArray, people){
-  let kids = people.filter(function(el){
-      for(let i = 0; i < personArray.length; i++){
-        for(let j = 0; j < el.parents.length; j++){
-          return personArray[i].id === el.parents[j];
-        }  
-      }
-  });
+  let descendants = people.filter(function(el){
 
-  if(kids.length > 0){
-    for(let i = 0; i < kids.length; i++){
-      if(i == kids.length - 1){
-        kidNameArray += kids[i].firstName + " " + kids[i].lastName + ".";
-      }
-      else{
-        kidNameArray += kids[i].firstName + " " + kids[i].lastName + ", ";
-      }
-    }
-    return findKids(kids, people);
-  }
-  else{
+    return  el.parents.includes(personArray[0].id);
+     
+  });
+  
+  // if(descendants.length > 0){
+  //   for(let i = 0; i < descendants.length; i++){
+  //     if(i == descendants.length - 1){
+  //       kidNameArray += descendants[i].firstName + " " + descendants[i].lastName + ".";
+  //     }
+  //     else{
+  //       kidNameArray += descendants[i].firstName + " " + descendants[i].lastName + ", ";
+  //     }
+  //   }
+  //   return findKids(descendants, people);
+  // }
+  // else{
  
-      return kidNameArray;
-  }
+  //   return kidNameArray;
+  // }
+  return descendants;
 }
 
 function findSiblings(jill, people){
   let returnString = "";
   siblingsArray = people.filter(function(si){
-    for( let i = 0; i < si.parents.length; i++ ){
-       if(jill[0].parents[i] == si.parents[0] && jill[0].id !== si.id){
-        returnString += si.firstName + " " + si.lastName;
-       }
-       //return jill[0].parents == si.parents[i] && jill[0].id !== si.id;
-    } 
+    return si.parents.includes((jill[0].parents[0] || jill[0].parents[1]) && jill[0].id !== si.id);
+
+
+
+
+    // for( let i = 0; i < si.parents.length; i++ ){
+    //    if(jill[0].parents[i] == si.parents[0] && jill[0].id !== si.id){
+    //     returnString += si.firstName + " " + si.lastName;
+    //    }
+    // } 
   });
-  
-  return returnString;
+  return siblingsArray;
 }
