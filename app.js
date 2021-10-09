@@ -47,7 +47,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    alert("Spouse: " + findSpouse(person, people) + "\n" + "Siblings:" + findSiblings(person, people));
+    alert("Spouse: "/*+ findSpouse(person, people)*/ + "\n" + "Siblings: " + findSiblings(person, people));
     
     break;
     case "descendants":
@@ -160,14 +160,16 @@ function findKids(personArray, people){
   }
 }
 
-function findSiblings(siblings, people){
-  siblings = people.filter(function(si){
-    for( let i = 0; 1 < people.length; i++ ){
-      if(siblings[i].parents == people[i].parents){
-        siblingsArray += siblingsArray + si[i].firstName + " " + si[i].lastName;
-      }
-    }
-      
+function findSiblings(jill, people){
+  let returnString = "";
+  siblingsArray = people.filter(function(si){
+    for( let i = 0; i < si.parents.length; i++ ){
+       if(jill[0].parents[i] == si.parents[0] && jill[0].id !== si.id){
+        returnString += si.firstName + " " + si.lastName;
+       }
+       //return jill[0].parents == si.parents[i] && jill[0].id !== si.id;
+    } 
   });
-  return siblingsArray
+  
+  return returnString;
 }
