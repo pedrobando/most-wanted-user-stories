@@ -7,6 +7,8 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 let kidNameArray = [];
 let siblingsArray = [];
+let descendants = [];
+let allDescendantsBucket = [];
 
 // app is the function called to start the entire application
 function app(people){
@@ -142,35 +144,22 @@ function findSpouse(personArray, people){
 
 
 function findKids(personArray, people){
-  let descendants = people.filter(function(el){
-
-    return  el.parents.includes(personArray[0].id);
-     
-  });
-
-for (let i = 0 ; i < descendants.length ; i++){
-  if(people[i].parents.includes(descendants[i].id)){
-    return descendants.push(findKids(descendants, people));
+  for(let i = 0; i < personArray.length; i++){
+      descendants = people.filter(function(el){
+      return  el.parents.includes(personArray[i].id);
+    });
   }
- 
- }
-  
-  // if(descendants.length > 0){
-  //   for(let i = 0; i < descendants.length; i++){
-  //     if(i == descendants.length - 1){
-  //       kidNameArray += descendants[i].firstName + " " + descendants[i].lastName + ".";
-  //     }
-  //     else{
-  //       kidNameArray += descendants[i].firstName + " " + descendants[i].lastName + ", ";
-  //     }
-  //   }
-  //   return findKids(descendants, people);
-  // }
-  // else{
- 
-  //   return kidNameArray;
-  // }
-  return descendants;
+   
+  if(descendants.length === 0){
+    return allDescendantsBucket;
+  }
+  else if(descendants.length > 0){
+    for(let i = 0; i < descendants.length; i++){
+      allDescendantsBucket.push(descendants[i]);
+    }
+    console.log(findKids(descendants, people));
+    return findKids(descendants, people);
+  }
 }
 
 function findSiblings(jill, people){
