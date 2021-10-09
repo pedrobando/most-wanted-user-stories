@@ -148,15 +148,17 @@ function findKids(personArray, people){
       descendants = people.filter(function(el){
       return  el.parents.includes(personArray[i].id);
     });
+    if(descendants.length > 0){
+      for(let i = 0; i < descendants.length; i++){
+        allDescendantsBucket.push(descendants[i]);
+      }
+    }
   }
    
   if(descendants.length === 0){
     return allDescendantsBucket;
   }
   else if(descendants.length > 0){
-    for(let i = 0; i < descendants.length; i++){
-      allDescendantsBucket.push(descendants[i]);
-    }
     console.log(findKids(descendants, people));
     return findKids(descendants, people);
   }
