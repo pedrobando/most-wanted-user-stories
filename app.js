@@ -147,6 +147,13 @@ function findKids(personArray, people){
     return  el.parents.includes(personArray[0].id);
      
   });
+
+for (let i = 0 ; i < descendants.length ; i++){
+  if(people[i].parents.includes(descendants[i].id)){
+    return descendants.push(findKids(descendants, people));
+  }
+ 
+ }
   
   // if(descendants.length > 0){
   //   for(let i = 0; i < descendants.length; i++){
