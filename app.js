@@ -5,9 +5,7 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
-let kidNameArray = [];
 let siblingsArray = [];
-let descendants = [];
 let allDescendantsBucket = [];
 
 // app is the function called to start the entire application
@@ -49,13 +47,14 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    alert("Spouse: "/*+ findSpouse(person, people)*/ + "\n" + "Siblings: " + findSiblings(person, people));
-    
+    alert("Spouse: "+ alertFirstAndLastName(findSpouse(person, people)) + "\n" + "Siblings: " + alertFirstAndLastName(findSiblings(person, people)));
+    siblingsArray = [];
+
     break;
     case "descendants":
     // TODO: get person's descendants
-    alert("Descendants: " + findKids(person, people));
-    kidNameArray = [];
+    alert("Descendants: " + alertFirstAndLastName(findKids(person, people)));
+    allDescendantsBucket = [];
     break;
     case "restart":
     app(people); // restart
@@ -132,19 +131,13 @@ function findSpouse(personArray, people){
   spouse = people.filter(function(el){
     return personArray[0].id === el.currentSpouse
     });
-  
-  if(spouse.length === 0){
-    return "";
-  }
-  else{
-    return spouse[0].firstName + " " + spouse[0].lastName;
-  }
-
+  return spouse;
 }
 
 
 function findKids(personArray, people){
   let genCounter = 0;
+  let descendants;
   for(let i = 0; i < personArray.length; i++){
       descendants = people.filter(function(el){
       return  el.parents.includes(personArray[i].id);
@@ -161,24 +154,32 @@ function findKids(personArray, people){
     return allDescendantsBucket;
   }
   else if(genCounter > 0){
-    console.log(findKids(descendants, people));
+    console.log(descendants);
     return findKids(descendants, people);
   }
 }
 
 function findSiblings(jill, people){
-  let returnString = "";
   siblingsArray = people.filter(function(si){
-    return si.parents.includes((jill[0].parents[0] || jill[0].parents[1]) && jill[0].id !== si.id);
-
-
-
-
-    // for( let i = 0; i < si.parents.length; i++ ){
-    //    if(jill[0].parents[i] == si.parents[0] && jill[0].id !== si.id){
-    //     returnString += si.firstName + " " + si.lastName;
-    //    }
-    // } 
+    return si.parents.includes((jill[0].parents[0] || jill[0].parents[1]) && jill[0].id !== si.id) 
   });
   return siblingsArray;
+}
+
+function alertFirstAndLastName(personArray){
+  let personString = "";
+  if(personArray.length === 0){
+    return "\n";
+  }
+  else{
+    for(let i = 0; i < personArray.length; i++){
+      if(personArray.length - 1 === i){
+        personString += personArray[i].firstName + " " + personArray[i].lastName + "\n";
+      }
+      else{
+        personString += personArray[i].firstName + " " + personArray[i].lastName + ", ";
+      }
+    }
+  }
+  return personString;
 }
