@@ -5,7 +5,7 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
-let siblingsArray = [];
+//let siblingsArray = [];
 let allDescendantsBucket = [];
 
 // app is the function called to start the entire application
@@ -47,9 +47,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    alert("Spouse: "+ alertFirstAndLastName(findSpouse(person, people)) + "\n" + "Siblings: " + alertFirstAndLastName(findSiblings(person, people)));
-    siblingsArray = [];
-
+    alert("Spouse: "+ alertFirstAndLastName(findSpouse(person, people)) + "\nSiblings: " + alertFirstAndLastName(findSiblings(person, people)) + "\nParents: " + alertFirstAndLastName(findParents(person, people)));
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -160,8 +158,8 @@ function findKids(personArray, people){
 }
 
 function findSiblings(jill, people){
-  siblingsArray = people.filter(function(si){
-    return si.parents.includes((jill[0].parents[0] || jill[0].parents[1]) && jill[0].id !== si.id) 
+  let siblingsArray = people.filter(function(si){
+    return jill[0].parents.includes(si.parents[0] || si.parents[1]) && si.id !== jill[0].id;
   });
   return siblingsArray;
 }
@@ -182,4 +180,11 @@ function alertFirstAndLastName(personArray){
     }
   }
   return personString;
+}
+
+function findParents(personArray, people){
+  let parents = people.filter(function(el){
+    return personArray[0].parents.includes(el.id);
+  });
+  return parents;
 }
