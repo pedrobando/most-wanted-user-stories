@@ -101,20 +101,20 @@ function searchByTraits(people){
     searchByTraits(people)
   }
   else{
-    let userInput = searchTraitsUserString(searchType); //
-    let returnedSearch = searchTraits(people, userInput);
-    alert(userInput + ": " + alertFirstAndLastName(returnedSearch));
+    let userInput = searchTraitsUserString(searchType); //gets what user inputs and displays it back with capitol letter on first letter
+    let returnedSearch = searchTraits(people, userInput); //searches through the data base and returns an array of matches and saves in variable
+    alert(userInput + ": " + alertFirstAndLastName(returnedSearch)); //GUI
     if(returnedSearch.length > 1){  //if there is more than one person we ask if we wnat to 
       let verify = prompt('Narrow search with more traits? Type "yes" or "no"');
       verify = verify.toLowerCase();
       if(verify === "yes"){
-        searchByTraits(returnedSearch);
+        searchByTraits(returnedSearch); //search again using only the people we had returned previously
       }
       else{
         app(people);
       }
     }
-    else if(returnedSearch.length === 1){
+    else if(returnedSearch.length === 1){ //if just one person we send to the main menu.
       mainMenu(returnedSearch, people);
     }
     return searchTraits(people, userInput);
@@ -123,19 +123,33 @@ function searchByTraits(people){
 
 // Individual trait 
 function searchTraits(people, userInput){
-  userInput = userInput.toLowerCase();
-  let foundPerson = people.filter(function(el){
-    return Object.values(el).indexOf(userInput) > -1
+ // userInput = userInput.toLowerCase();
+ if(userInput === "spouse"){
+   userInput === "currentSpouse";
+ }
+ if (isNaN(userInput)) {
+  userInput = userInput.split("");
+  userInput[0] = userInput[0].toUpperCase();
+  userInput = userInput.join("");
+  return userInput;
+  }
+  else{
+  userInput = parseInt(userInput);
+  }
+
+  let foundPerson = people.filter(function(obj){
+    let key = Object.values(obj);
+    for(let i = 0; i < key.length; i++){
+      return key[i] === userInput;
+    }
   });
   return foundPerson;
 }
  
 // Takes what the user inputs and displays returns it back with a capital letter on the first letter.
 function searchTraitsUserString(searchType){
-  let userInput = prompt(`What is the person's ${searchType}?`);
-  userInput = userInput.split("");
-  userInput[0] = userInput[0].toUpperCase();
-  userInput = userInput.join("");
+  let userInput = prompt(`Enter is the person's ${searchType}?`);
+  userInput = userInput.toLowerCase();
   return userInput;
 }
 
