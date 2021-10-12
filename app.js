@@ -102,7 +102,21 @@ function searchByTraits(people){
   }
   else{
     let userInput = searchTraitsUserString(searchType);
-    alert(userInput + ": " + alertFirstAndLastName(searchTraits(people, userInput)));
+    let returnedSearch = searchTraits(people, userInput);
+    alert(userInput + ": " + alertFirstAndLastName(returnedSearch));
+    if(returnedSearch.length > 1){
+      let verify = prompt('Narrow search with more traits? Type "yes" or "no"');
+      verify = verify.toLowerCase();
+      if(verify === "yes"){
+        searchByTraits(returnedSearch);
+      }
+      else{
+        app(people);
+      }
+    }
+    else if(returnedSearch.length === 1){
+      mainMenu(returnedSearch, people);
+    }
     return searchTraits(people, userInput);
   }
 }
