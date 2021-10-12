@@ -89,40 +89,40 @@ function displayPeople(people){
 // Search by all traits
 function searchByTraits(people){
   let searchType = prompt("Do you want to search by gender, dob, eye color, parents, occupation, height, weight, or spouse? Type the option you want or 'restart' or 'quit'");
-  switch(searchType){
-    case "gender":
-      alert(alertFirstAndLastName(searchTraits(people, searchType)));
-      break;
-    case 'dob':
-      alert(alertFirstAndLastName(searchTraits(people, searchType)));
-      break;
-    case 'eye color':
-    case 'parents':
-    case 'occupation':
-    case 'height':
-    case 'weight':
-    case 'spouse':
-    case "restart":
-    //app(people); // restart
-    break;
-    case "quit":
-    return; // stop execution
-    default:
-    return searchByTraits(people, searchType); // ask again
-   
-
+  searchType = searchType.toLowerCase();
+  if(searchType !== "gender" && searchType !== "dob" && searchType !== "eye color" && searchType !== "parents" && searchType !== "occupation" && searchType !== "height" && searchType !== "weight" && searchType !== spouse){
+    alert("Invalid input. Try again.");
+    searchByTraits(people)
+  }
+  else if(searchType === "restart"){
+    app(people);
+  }
+  else if(searchType === "quit"){
+    return;
+  }
+  else{
+     let userInput = searchTraitsUserString(searchType);
+      alert(userInput + ": " + alertFirstAndLastName(searchTraits(people, userInput)));
   }
 }
 
 // Individual trait 
-function searchTraits(people, searchType){
-  let userInput = prompt(`What is the person's ${searchType} ?`);
+function searchTraits(people, userInput){
+  userInput = userInput.toLowerCase();
   let foundPerson = people.filter(function(el){
     return Object.values(el).indexOf(userInput) > -1
   });
   return foundPerson;
 }
-
+ 
+// Individual trait 
+function searchTraitsUserString(searchType){
+  let userInput = prompt(`What is the person's ${searchType}?`);
+  userInput = userInput.split("");
+  userInput[0] = userInput[0].toUpperCase();
+  userInput = userInput.join("");
+  return userInput;
+}
 
 
 
