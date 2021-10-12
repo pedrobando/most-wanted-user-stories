@@ -116,14 +116,9 @@ function searchByTraits(people){
 
 // Individual trait 
 function searchTraits(people, searchType){
-  userInput = prompt(`What is the person's ${searchType} ?`);
-  let foundPerson = people.filter(function(person){
-    if(person.userInput === userInput){ 
-      return true
-    }
-    else{
-      return false
-    }
+  let userInput = prompt(`What is the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(el){
+    return Object.values(el).indexOf(userInput) > -1
   });
   return foundPerson;
 }
