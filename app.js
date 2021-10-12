@@ -14,8 +14,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
-      //A function 
+      searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -25,6 +24,7 @@ function app(people){
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -61,6 +61,7 @@ function mainMenu(person, people){
   }
 }
 
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -83,6 +84,52 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+
+
+// Search by all traits
+function searchByTraits(people){
+  let searchType = prompt("Do you want to search by gender, dob, eye color, parents, occupation, height, weight, or spouse? Type the option you want or 'restart' or 'quit'");
+  switch(searchType){
+    case "gender":
+      alert(alertFirstAndLastName(searchTraits(people, searchType)));
+      break;
+    case 'dob':
+      alert(alertFirstAndLastName(searchTraits(people, searchType)));
+      break;
+    case 'eye color':
+    case 'parents':
+    case 'occupation':
+    case 'height':
+    case 'weight':
+    case 'spouse':
+    case "restart":
+    //app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return searchByTraits(people, searchType); // ask again
+   
+
+  }
+}
+
+// Individual trait 
+function searchTraits(people, searchType){
+  userInput = prompt(`What is the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.userInput === userInput){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return foundPerson;
+}
+
+
+
 
 function displayPerson(person){
   // print all of the information about a person:
