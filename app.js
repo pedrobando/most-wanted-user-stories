@@ -131,15 +131,17 @@ function findSpouse(personArray, people){
 
 
 function findKids(personArray, people){
-  // let genCounter = 0;
+  let allDescendantsBucket = [];
   let descendants;
   for(let i = 0; i < personArray.length; i++){
       descendants = people.filter(function(el){
       return  el.parents.includes(personArray[i].id);
     });
-
     if(descendants.length > 0){
-      descendants = descendants.concat(findKids(descendants, people));
+      for(let i = 0; i < descendants.length; i++){
+        allDescendantsBucket.push(descendants[i]);
+      }
+      descendants = allDescendantsBucket.concat(findKids(descendants, people));
     }
   }
   return descendants;
