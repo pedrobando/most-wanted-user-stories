@@ -14,7 +14,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchByTraits(people);
+      searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -90,19 +90,20 @@ function displayPeople(people){
 function searchByTraits(people){
   let searchType = prompt("Do you want to search by gender, dob, eye color, parents, occupation, height, weight, or spouse? Type the option you want or 'restart' or 'quit'");
   searchType = searchType.toLowerCase();
-  if(searchType !== "gender" && searchType !== "dob" && searchType !== "eye color" && searchType !== "parents" && searchType !== "occupation" && searchType !== "height" && searchType !== "weight" && searchType !== "spouse"){
-    alert("Invalid input. Try again.");
-    searchByTraits(people)
-  }
-  else if(searchType === "restart"){
+  if(searchType === "restart"){
     app(people);
   }
   else if(searchType === "quit"){
     return;
   }
+  else if(searchType !== "gender" && searchType !== "dob" && searchType !== "eye color" && searchType !== "parents" && searchType !== "occupation" && searchType !== "height" && searchType !== "weight" && searchType !== "spouse"){
+    alert("Invalid input. Try again.");
+    searchByTraits(people)
+  }
   else{
-     let userInput = searchTraitsUserString(searchType);
-      alert(userInput + ": " + alertFirstAndLastName(searchTraits(people, userInput)));
+    let userInput = searchTraitsUserString(searchType);
+    alert(userInput + ": " + alertFirstAndLastName(searchTraits(people, userInput)));
+    return searchTraits(people, userInput);
   }
 }
 
