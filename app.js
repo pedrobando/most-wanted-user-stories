@@ -5,9 +5,6 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
-//let siblingsArray = [];
-let allDescendantsBucket = [];
-
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -18,6 +15,7 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
+      //A function 
       break;
       default:
     app(people); // restart app
@@ -52,7 +50,6 @@ function mainMenu(person, people){
     case "descendants":
     // TODO: get person's descendants
     alert("Descendants: " + alertFirstAndLastName(findKids(person, people)));
-    allDescendantsBucket = [];
     break;
     case "restart":
     app(people); // restart
@@ -134,27 +131,18 @@ function findSpouse(personArray, people){
 
 
 function findKids(personArray, people){
-  let genCounter = 0;
+  // let genCounter = 0;
   let descendants;
   for(let i = 0; i < personArray.length; i++){
       descendants = people.filter(function(el){
       return  el.parents.includes(personArray[i].id);
     });
+
     if(descendants.length > 0){
-      for(let i = 0; i < descendants.length; i++){
-        allDescendantsBucket.push(descendants[i]);
-        genCounter++;
-      }
+      descendants = descendants.concat(findKids(descendants, people));
     }
   }
-   
-  if(genCounter === 0){
-    return allDescendantsBucket;
-  }
-  else if(genCounter > 0){
-    console.log(descendants);
-    return findKids(descendants, people);
-  }
+  return descendants;
 }
 
 function findSiblings(jill, people){
