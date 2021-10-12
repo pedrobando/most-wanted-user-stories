@@ -101,10 +101,10 @@ function searchByTraits(people){
     searchByTraits(people)
   }
   else{
-    let userInput = searchTraitsUserString(searchType);
+    let userInput = searchTraitsUserString(searchType); //
     let returnedSearch = searchTraits(people, userInput);
     alert(userInput + ": " + alertFirstAndLastName(returnedSearch));
-    if(returnedSearch.length > 1){
+    if(returnedSearch.length > 1){  //if there is more than one person we ask if we wnat to 
       let verify = prompt('Narrow search with more traits? Type "yes" or "no"');
       verify = verify.toLowerCase();
       if(verify === "yes"){
@@ -130,7 +130,7 @@ function searchTraits(people, userInput){
   return foundPerson;
 }
  
-// Individual trait 
+// Takes what the user inputs and displays returns it back with a capital letter on the first letter.
 function searchTraitsUserString(searchType){
   let userInput = prompt(`What is the person's ${searchType}?`);
   userInput = userInput.split("");
