@@ -172,6 +172,16 @@ function alertFirstAndLastName(personArray){
   return personString;
 }
 
+//New Function to merge first and last name.
+function fullName(nameArray){
+  for(let i = 0; i < nameArray.length-1;i++){
+      let fullName = nameArray[i].splice(1,2).join(" ");
+      console.log(fullName);
+      return nameArray
+  }
+ }
+ 
+
 function findParents(personArray, people){
   let parents = people.filter(function(el){
     return personArray[0].parents.includes(el.id);
