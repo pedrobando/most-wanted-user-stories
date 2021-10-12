@@ -123,22 +123,13 @@ function searchByTraits(people){
 
 // Individual trait 
 function searchTraits(people, userInput){
- // userInput = userInput.toLowerCase();
- if(userInput === "spouse"){
+ if(userInput === "Spouse"){
     userInput === "currentSpouse";
  }
  else if(userInput === "eye color"){
     userInput === "eyeColor";
  }
  
- if (isNaN(userInput)) {
-    userInput = userInput.split("");
-    userInput[0] = userInput[0].toUpperCase();
-    userInput = userInput.join("");
-  }
-  else{
-    userInput = parseInt(userInput);
-  }
 
   let foundPerson = people.filter(function(obj){
     let key = Object.values(obj);
@@ -154,7 +145,16 @@ function searchTraits(people, userInput){
 // Takes what the user inputs and displays returns it back with a capital letter on the first letter.
 function searchTraitsUserString(searchType){
   let userInput = prompt(`Enter is the person's ${searchType}?`);
-  userInput = userInput.toLowerCase();
+  if (isNaN(userInput)) {
+    userInput = userInput.toLocaleLowerCase();
+    // userInput[0] = userInput[0].toUpperCase();
+    // userInput = userInput.join("");
+    return userInput;
+  }
+  else{
+    userInput = parseInt(userInput);
+  }
+
   return userInput;
 }
 
