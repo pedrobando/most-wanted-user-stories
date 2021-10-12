@@ -125,22 +125,27 @@ function searchByTraits(people){
 function searchTraits(people, userInput){
  // userInput = userInput.toLowerCase();
  if(userInput === "spouse"){
-   userInput === "currentSpouse";
+    userInput === "currentSpouse";
  }
+ else if(userInput === "eye color"){
+    userInput === "eyeColor";
+ }
+ 
  if (isNaN(userInput)) {
-  userInput = userInput.split("");
-  userInput[0] = userInput[0].toUpperCase();
-  userInput = userInput.join("");
-  return userInput;
+    userInput = userInput.split("");
+    userInput[0] = userInput[0].toUpperCase();
+    userInput = userInput.join("");
   }
   else{
-  userInput = parseInt(userInput);
+    userInput = parseInt(userInput);
   }
 
   let foundPerson = people.filter(function(obj){
     let key = Object.values(obj);
     for(let i = 0; i < key.length; i++){
-      return key[i] === userInput;
+      if(key[i] === userInput){
+        return true;
+      }
     }
   });
   return foundPerson;
