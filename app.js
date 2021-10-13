@@ -95,14 +95,22 @@ function recTraits(foundPerson, people, control){
     return searchByTraits(control, control);
   }
   else{
+    displayPeople(foundPerson);
     return searchByTraits(foundPerson , control);
+  }
+}
+
+function notANumber(input, searchType){
+  while(isNaN(input)){
+    alert("Invaild input.  Please input a number.");
+    input = prompt(`Enter the person's ${searchType} ?`);
   }
 }
 
 // Search by all traits
 function searchByTraits(people, control){
   control = control;
-  let searchType = prompt("Do you want to search by gender, dob, eye color, parents, occupation, height, weight, or spouse? Type the option you want or 'restart' or 'quit'");
+  let searchType = promptFor("Do you want to search by 'gender', 'dob', 'eye color', 'parents', 'occupation', 'height', 'weight', or 'spouse'? Type the option you want or 'restart' or 'quit'", searchTypeCallBack);
   switch(searchType){
     case "gender":
       return searchTraitsGender(people, searchType, control);
@@ -133,7 +141,7 @@ function searchByTraits(people, control){
 
 // Individual trait - gender
 function searchTraitsGender(people, searchType, control){
-  let gender = prompt(`Enter the person's ${searchType} ?`);
+  let gender = promptFor(`Enter the person's ${searchType} ?`, genderCallBack);
   let foundPerson = people.filter(function(person){
     if(person.gender === gender){ 
       return true
@@ -142,9 +150,7 @@ function searchTraitsGender(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-  
 }
 
 // Individual trait - dob
@@ -158,14 +164,12 @@ function searchTraitsDob(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-
 }
 
 // Individual trait - eye
 function searchTraitsEye(people, searchType, control){
-  let eye = prompt(`Enter the person's ${searchType} ?`);
+  let eye = promptFor(`Enter the person's ${searchType} ?`, eyeColorCallBack);
   let foundPerson = people.filter(function(person){
     if(person.eyeColor === eye){ 
       return true
@@ -174,13 +178,13 @@ function searchTraitsEye(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 }
 
 // Individual trait - height
 function searchTraitsHeight(people, searchType, control){
   let height = prompt(`Enter the person's ${searchType} ?`);
+  notANumber(height, searchType);
   let foundPerson = people.filter(function(person){
     if(person.height == height){ 
       return true
@@ -189,14 +193,13 @@ function searchTraitsHeight(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-
 }
 
 // Individual trait - weight
 function searchTraitsWeight(people, searchType, control){
   let weight = prompt(`Enter the person's ${searchType} ?`);
+  notANumber(weight, searchType);
   let foundPerson = people.filter(function(person){
     if(person.weight == weight){ 
       return true
@@ -205,14 +208,13 @@ function searchTraitsWeight(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-
 }
 
 // Individual trait - parents
 function searchTraitsParents(people, searchType, control){
   let parents = prompt(`Enter the person's ${searchType} ?`);
+  notANumber(parents, searchType);
   let foundPerson = people.filter(function(person){
     if(person.parents[0] == parents ||person.parents[1] == parents ){ 
       return true
@@ -221,14 +223,13 @@ function searchTraitsParents(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-
 }
 
 // Individual trait - spouse
 function searchTraitsSpouse(people, searchType, control){
   let spouse = prompt(`Enter the person's ${searchType} ?`);
+  notANumber(spouse, searchType);
   let foundPerson = people.filter(function(person){
     if(person.currentSpouse == spouse){ 
       return true
@@ -237,9 +238,7 @@ function searchTraitsSpouse(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-
 }
 
 // Individual trait - occupation
@@ -253,9 +252,7 @@ function searchTraitsOccupation(people, searchType, control){
       return false
     }
   });
-  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
-
 }
 
 function displayPerson(person){
@@ -289,8 +286,17 @@ function promptFor(question, valid){
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
+function genderCallBack(input){
+  return input.toLowerCase() == "male" || input.toLowerCase() == "female";
+}
 function mainMenuCallBack(input){
   return input.toLowerCase() == "info" || input.toLowerCase() == "family" || input.toLowerCase() == "descendants" || input.toLowerCase() == "restart" || input.toLowerCase() == "quit";
+}
+function eyeColorCallBack(input){
+  return input.toLowerCase() == "black" || input.toLowerCase() == "brown" || input.toLowerCase() == "green" || input.toLowerCase() == "hazel" || input.toLowerCase() == "blue";
+}
+function searchTypeCallBack(input){
+  return input.toLowerCase() == "gender" || input.toLowerCase() == "dob" || input.toLowerCase() == "eye color" || input.toLowerCase() == "parents" || input.toLowerCase() == "occupation" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "spouse" || input.toLowerCase() == "quit";
 }
 
 // helper function to pass in as default promptFor validation
