@@ -31,7 +31,7 @@ function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if(!person){
+  if(person.length === 0){
     alert("Could not find that individual.");
     return app(people); // restart
   }
