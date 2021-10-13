@@ -36,7 +36,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", mainMenuCallBack);
 
   switch(displayOption){
     case "info":
@@ -87,10 +87,10 @@ function displayPeople(people){
 
 // Function to recursively check traits
 function recTraits(foundPerson, people, control){
-  if(foundPerson.length == 1){
+  if(foundPerson.length === 1){
     return foundPerson;
   }
-  else if(foundPerson.length == 0){
+  else if(foundPerson.length === 0){
     alert("No individuals found. Please start again.");
     return searchByTraits(control, control);
   }
@@ -105,38 +105,28 @@ function searchByTraits(people, control){
   let searchType = prompt("Do you want to search by gender, dob, eye color, parents, occupation, height, weight, or spouse? Type the option you want or 'restart' or 'quit'");
   switch(searchType){
     case "gender":
-      displayPeople(searchTraitsGender(people, searchType, control));
       return searchTraitsGender(people, searchType, control);
     case 'dob':
-      displayPeople(searchTraitsDob(people, searchType, control));
       return searchTraitsDob(people, searchType, control);
     case 'eye color':
-      displayPeople(searchTraitsEye(people, searchType, control));
       return searchTraitsEye(people, searchType, control);
     case 'parents':
-      displayPeople(searchTraitsParents(people, searchType));
-      return searchTraitsParents(people, searchType);
+      return searchTraitsParents(people, searchType, control);
     case 'occupation':
-      displayPeople(searchTraitsOccupation(people, searchType));
-      return searchTraitsOccupation(people, searchType);
-    case 'height':
-      displayPeople(searchTraitsHeight(people, searchType, control));
+      return searchTraitsOccupation(people, searchType, control);
+    case 'height': 
       return searchTraitsHeight(people, searchType, control);
-    case 'weight':
-      displayPeople(searchTraitsWeight(people, searchType));
-      return searchTraitsWeight(people, searchType);
+    case 'weight': 
+      return searchTraitsWeight(people, searchType, control);
     case 'spouse':
-      displayPeople(searchTraitsSpouse(people, searchType));
-      return searchTraitsSpouse(people, searchType);
+      return searchTraitsSpouse(people, searchType, control);
     case "restart":
-    //app(people); // restart
+    app(people); // restart
     break;
     case "quit":
     return; // stop execution
     default:
-    //return mainMenu(person, people); // ask again
-   
-
+    return mainMenu(person, people); // ask again
   }
   return
 }
@@ -152,12 +142,13 @@ function searchTraitsGender(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
   
 }
 
 // Individual trait - dob
-function searchTraitsDob(people, searchType){
+function searchTraitsDob(people, searchType, control){
   let dob = prompt(`Enter the person's ${searchType} ? Please use ##/##/####`);
   let foundPerson = people.filter(function(person){
     if(person.dob === dob){ 
@@ -167,6 +158,7 @@ function searchTraitsDob(people, searchType){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 
 }
@@ -182,6 +174,7 @@ function searchTraitsEye(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 }
 
@@ -196,6 +189,7 @@ function searchTraitsHeight(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 
 }
@@ -211,6 +205,7 @@ function searchTraitsWeight(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 
 }
@@ -226,6 +221,7 @@ function searchTraitsParents(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 
 }
@@ -241,6 +237,7 @@ function searchTraitsSpouse(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 
 }
@@ -256,6 +253,7 @@ function searchTraitsOccupation(people, searchType, control){
       return false
     }
   });
+  displayPeople(foundPerson);
   return recTraits(foundPerson, people, control);
 
 }
@@ -290,6 +288,9 @@ function promptFor(question, valid){
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
+}
+function mainMenuCallBack(input){
+  return input.toLowerCase() == "info" || input.toLowerCase() == "family" || input.toLowerCase() == "descendants" || input.toLowerCase() == "restart" || input.toLowerCase() == "quit";
 }
 
 // helper function to pass in as default promptFor validation
