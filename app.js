@@ -14,7 +14,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchByTraits(people);
+      searchResults = searchByTraits(people, people);
       break;
       default:
     app(people); // restart app
@@ -41,7 +41,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
-    alert(displayPerson(person[0]));
+    displayPerson(person[0]);
     break;
     case "family":
     // TODO: get person's family
@@ -85,51 +85,180 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+// Function to recursively check traits
+function recTraits(foundPerson, people, control){
+  if(foundPerson.length == 1){
+    return foundPerson;
+  }
+  else if(foundPerson.length == 0){
+    alert("No individuals found. Please start again.");
+    return searchByTraits(control, control);
+  }
+  else{
+    return searchByTraits(foundPerson , control);
+  }
+}
 
 // Search by all traits
-function searchByTraits(people){
+function searchByTraits(people, control){
+  control = control;
   let searchType = prompt("Do you want to search by gender, dob, eye color, parents, occupation, height, weight, or spouse? Type the option you want or 'restart' or 'quit'");
   switch(searchType){
     case "gender":
-      alert(alertFirstAndLastName(searchTraits(people, searchType)));
-      break;
+      displayPeople(searchTraitsGender(people, searchType, control));
+      return searchTraitsGender(people, searchType, control);
     case 'dob':
-      alert(alertFirstAndLastName(searchTraits(people, searchType)));
-      break;
+      displayPeople(searchTraitsDob(people, searchType, control));
+      return searchTraitsDob(people, searchType, control);
     case 'eye color':
+      displayPeople(searchTraitsEye(people, searchType, control));
+      return searchTraitsEye(people, searchType, control);
     case 'parents':
+      displayPeople(searchTraitsParents(people, searchType));
+      return searchTraitsParents(people, searchType);
     case 'occupation':
+      displayPeople(searchTraitsOccupation(people, searchType));
+      return searchTraitsOccupation(people, searchType);
     case 'height':
+      displayPeople(searchTraitsHeight(people, searchType, control));
+      return searchTraitsHeight(people, searchType, control);
     case 'weight':
+      displayPeople(searchTraitsWeight(people, searchType));
+      return searchTraitsWeight(people, searchType);
     case 'spouse':
+      displayPeople(searchTraitsSpouse(people, searchType));
+      return searchTraitsSpouse(people, searchType);
     case "restart":
     //app(people); // restart
     break;
     case "quit":
     return; // stop execution
     default:
-    return searchByTraits(people, searchType); // ask again
+    //return mainMenu(person, people); // ask again
    
 
   }
+  return
 }
 
-// Individual trait 
-function searchTraits(people, searchType){
-  userInput = prompt(`What is the person's ${searchType} ?`);
+// Individual trait - gender
+function searchTraitsGender(people, searchType, control){
+  let gender = prompt(`Enter the person's ${searchType} ?`);
   let foundPerson = people.filter(function(person){
-    if(person.userInput === userInput){ 
+    if(person.gender === gender){ 
       return true
     }
     else{
       return false
     }
   });
-  return foundPerson;
+  return recTraits(foundPerson, people, control);
+  
 }
 
+// Individual trait - dob
+function searchTraitsDob(people, searchType){
+  let dob = prompt(`Enter the person's ${searchType} ? Please use ##/##/####`);
+  let foundPerson = people.filter(function(person){
+    if(person.dob === dob){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
 
+}
 
+// Individual trait - eye
+function searchTraitsEye(people, searchType, control){
+  let eye = prompt(`Enter the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.eyeColor === eye){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
+}
+
+// Individual trait - height
+function searchTraitsHeight(people, searchType, control){
+  let height = prompt(`Enter the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.height == height){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
+
+}
+
+// Individual trait - weight
+function searchTraitsWeight(people, searchType, control){
+  let weight = prompt(`Enter the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.weight == weight){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
+
+}
+
+// Individual trait - parents
+function searchTraitsParents(people, searchType, control){
+  let parents = prompt(`Enter the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.parents[0] == parents ||person.parents[1] == parents ){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
+
+}
+
+// Individual trait - spouse
+function searchTraitsSpouse(people, searchType, control){
+  let spouse = prompt(`Enter the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.currentSpouse == spouse){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
+
+}
+
+// Individual trait - occupation
+function searchTraitsOccupation(people, searchType, control){
+  let occupation = prompt(`Enter the person's ${searchType} ?`);
+  let foundPerson = people.filter(function(person){
+    if(person.occupation == occupation){ 
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  return recTraits(foundPerson, people, control);
+
+}
 
 function displayPerson(person){
   // print all of the information about a person:
