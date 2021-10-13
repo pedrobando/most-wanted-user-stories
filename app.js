@@ -109,6 +109,9 @@ function recTraits(foundPerson, people, control){
     return foundPerson;
   }
   else if(foundPerson.length === 0){
+    if(foundPerson == "quit"){
+      return app(control);
+    }
     alert("No individuals found. Please start again.");
     return searchByTraits(control, control);
   }
