@@ -302,18 +302,33 @@ function promptFor(question, valid){
 
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
+  if(input.toLowerCase() != "yes" && input.toLowerCase() != "no"){
+    alert("Invalid input. Please try again.");
+  }
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 function genderCallBack(input){
+  if(input.toLowerCase() != "male" && input.toLowerCase() != "female"){
+    alert("Invalid input. Please try again.");
+  }
   return input.toLowerCase() == "male" || input.toLowerCase() == "female";
 }
 function mainMenuCallBack(input){
+  if(input.toLowerCase() != "info" && input.toLowerCase() != "family" && input.toLowerCase() != "descendants" && input.toLowerCase() != "restart" && input.toLowerCase() != "quit"){
+    alert("Invalid input. Please try again.");
+  }
   return input.toLowerCase() == "info" || input.toLowerCase() == "family" || input.toLowerCase() == "descendants" || input.toLowerCase() == "restart" || input.toLowerCase() == "quit";
 }
 function eyeColorCallBack(input){
+  if(input.toLowerCase() != "black" && input.toLowerCase() != "brown" && input.toLowerCase() != "green" && input.toLowerCase() != "hazel" && input.toLowerCase() != "blue"){
+    alert("Invalid input. Please try again.");
+  }
   return input.toLowerCase() == "black" || input.toLowerCase() == "brown" || input.toLowerCase() == "green" || input.toLowerCase() == "hazel" || input.toLowerCase() == "blue";
 }
 function searchTypeCallBack(input){
+  if(input.toLowerCase() != "gender" && input.toLowerCase() != "dob" && input.toLowerCase() != "eye color" && input.toLowerCase() != "parents" && input.toLowerCase() != "occupation" && input.toLowerCase() != "height" && input.toLowerCase() != "weight" && input.toLowerCase() != "spouse" && input.toLowerCase() != "quit"){
+    alert("Invalid input. Please try again.");
+  }
   return input.toLowerCase() == "gender" || input.toLowerCase() == "dob" || input.toLowerCase() == "eye color" || input.toLowerCase() == "parents" || input.toLowerCase() == "occupation" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "spouse" || input.toLowerCase() == "quit";
 }
 
