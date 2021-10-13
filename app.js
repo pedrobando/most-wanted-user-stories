@@ -104,7 +104,7 @@ function alertFirstAndLastName(personArray){
 }
 
 // Function to recursively check traits
-function recTraits(foundPerson, people, control){
+function recTraits(foundPerson, control){
   if(foundPerson.length === 1){
     return foundPerson;
   }
@@ -171,7 +171,7 @@ function searchTraitsGender(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - dob
@@ -185,7 +185,7 @@ function searchTraitsDob(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - eye
@@ -199,7 +199,7 @@ function searchTraitsEye(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - height
@@ -214,7 +214,7 @@ function searchTraitsHeight(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - weight
@@ -229,7 +229,7 @@ function searchTraitsWeight(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - parents
@@ -244,7 +244,7 @@ function searchTraitsParents(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - spouse
@@ -259,7 +259,7 @@ function searchTraitsSpouse(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 // Individual trait - occupation
@@ -273,7 +273,7 @@ function searchTraitsOccupation(people, searchType, control){
       return false
     }
   });
-  return recTraits(foundPerson, people, control);
+  return recTraits(foundPerson, control);
 }
 
 function displayPerson(person){
