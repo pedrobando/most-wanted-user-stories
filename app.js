@@ -20,11 +20,9 @@ function app(people){
     app(people); // restart app
       break;
   }
-  
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
-
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -60,7 +58,6 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
@@ -312,7 +309,6 @@ function findSpouse(personArray, people){
   return spouse;
 }
 
-
 function findKids(personArray, people){
   let allDescendantsBucket = [];
   let descendants;
@@ -336,34 +332,6 @@ function findSiblings(jill, people){
   });
   return siblingsArray;
 }
-
-function alertFirstAndLastName(personArray){
-  let personString = "";
-  if(personArray.length === 0){
-    return "\n";
-  }
-  else{
-    for(let i = 0; i < personArray.length; i++){
-      if(personArray.length - 1 === i){
-        personString += personArray[i].firstName + " " + personArray[i].lastName + "\n";
-      }
-      else{
-        personString += personArray[i].firstName + " " + personArray[i].lastName + ", ";
-      }
-    }
-  }
-  return personString;
-}
-
-//New Function to merge first and last name.
-function fullName(nameArray){
-  for(let i = 0; i < nameArray.length-1;i++){
-      let fullName = nameArray[i].splice(1,2).join(" ");
-      console.log(fullName);
-      return nameArray
-  }
- }
- 
 
 function findParents(personArray, people){
   let parents = people.filter(function(el){
