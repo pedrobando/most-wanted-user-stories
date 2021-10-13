@@ -170,6 +170,19 @@ function searchTraitsDob(people, searchType){
   return recTraits(foundPerson, people, control);
 
 }
+ 
+// Takes what the user inputs and displays returns it back with a capital letter on the first letter.
+function searchTraitsUserString(searchType){
+  let userInput = prompt(`Enter is the person's ${searchType}?`);
+  if (isNaN(userInput)) {
+    userInput = userInput.toLocaleLowerCase();
+    // userInput[0] = userInput[0].toUpperCase();
+    // userInput = userInput.join("");
+    return userInput;
+  }
+  else{
+    userInput = parseInt(userInput);
+  }
 
 // Individual trait - eye
 function searchTraitsEye(people, searchType, control){
