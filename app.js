@@ -20,9 +20,11 @@ function app(people){
     app(people); // restart app
       break;
   }
+  
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -59,6 +61,7 @@ function mainMenu(person, people){
   }
 }
 
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -80,6 +83,24 @@ function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
+}
+
+function alertFirstAndLastName(personArray){
+  let personString = "";
+  if(personArray.length === 0){
+    return "\n";
+  }
+  else{
+    for(let i = 0; i < personArray.length; i++){
+      if(personArray.length - 1 === i){
+        personString += personArray[i].firstName + " " + personArray[i].lastName + "\n";
+      }
+      else{
+        personString += personArray[i].firstName + " " + personArray[i].lastName + ", ";
+      }
+    }
+  }
+  return personString;
 }
 
 // Function to recursively check traits
@@ -332,7 +353,7 @@ function findSiblings(jill, people){
   });
   return siblingsArray;
 }
-
+ 
 function findParents(personArray, people){
   let parents = people.filter(function(el){
     return personArray[0].parents.includes(el.id);
