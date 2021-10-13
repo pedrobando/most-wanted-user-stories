@@ -42,15 +42,15 @@ function mainMenu(person, people){
     case "info":
     // TODO: get person's info
     displayPerson(person[0]);
-    break;
+    return mainMenu(person, people);
     case "family":
     // TODO: get person's family
     alert("Spouse: "+ alertFirstAndLastName(findSpouse(person, people)) + "\nSiblings: " + alertFirstAndLastName(findSiblings(person, people)) + "\nParents: " + alertFirstAndLastName(findParents(person, people)));
-    break;
+    return mainMenu(person, people);
     case "descendants":
     // TODO: get person's descendants
     alert("Descendants: " + alertFirstAndLastName(findKids(person, people)));
-    break;
+    return mainMenu(person, people);
     case "restart":
     app(people); // restart
     break;
