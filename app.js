@@ -150,13 +150,12 @@ function searchByTraits(people, control){
     case 'spouse':
       return searchTraitsSpouse(people, searchType, control);
     case "restart":
-      return mainMenu(person, people); // restart
+      app(control); // restart
     case "quit":
     return; // stop execution
     default:
     return mainMenu(person, people); // ask again
   }
-  return
 }
 
 // Individual trait - gender
@@ -331,7 +330,7 @@ function searchTypeCallBack(input){
   if(input.toLowerCase() != "gender" && input.toLowerCase() != "dob" && input.toLowerCase() != "eye color" && input.toLowerCase() != "parents" && input.toLowerCase() != "occupation" && input.toLowerCase() != "height" && input.toLowerCase() != "weight" && input.toLowerCase() != "spouse" && input.toLowerCase() != "quit" && input.toLowerCase() != "restart"){
     alert("Invalid input. Please try again.");
   }
-  return input.toLowerCase() == "gender" || input.toLowerCase() == "dob" || input.toLowerCase() == "eye color" || input.toLowerCase() == "parents" || input.toLowerCase() == "occupation" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "spouse" || input.toLowerCase() == "quit";
+  return input.toLowerCase() == "gender" || input.toLowerCase() == "dob" || input.toLowerCase() == "eye color" || input.toLowerCase() == "parents" || input.toLowerCase() == "occupation" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "spouse" || input.toLowerCase() == "quit" || input.toLowerCase() == "restart";
 }
 
 // helper function to pass in as default promptFor validation
