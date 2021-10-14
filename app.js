@@ -41,7 +41,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
-    displayPerson(person[0]);
+    displayPerson(person[0], people);
     return mainMenu(person, people);
     case "family":
     // TODO: get person's family
@@ -274,9 +274,15 @@ function searchTraitsOccupation(people, searchType, control){
   return recTraits(foundPerson, control);
 }
 
-function displayPerson(person){
+function displayPerson(person, people){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
+  let spouseName = alertFirstAndLastName(people.filter(function(el){
+    if(person.currentSpouse == el.id){
+      return true;
+    }
+}));
+
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
@@ -286,9 +292,13 @@ function displayPerson(person){
   personInfo += "Eye color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n";
-  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
+  personInfo += "Current Spouse: " + spouseName + "\n";
   personInfo += "This is all the information that we have so far."
+  
+  
+  
 
+  
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
