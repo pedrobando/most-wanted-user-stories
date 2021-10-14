@@ -150,8 +150,7 @@ function searchByTraits(people, control){
     case 'spouse':
       return searchTraitsSpouse(people, searchType, control);
     case "restart":
-    app(people); // restart
-    break;
+      return mainMenu(person, people); // restart
     case "quit":
     return; // stop execution
     default:
@@ -329,7 +328,7 @@ function eyeColorCallBack(input){
   return input.toLowerCase() == "black" || input.toLowerCase() == "brown" || input.toLowerCase() == "green" || input.toLowerCase() == "hazel" || input.toLowerCase() == "blue";
 }
 function searchTypeCallBack(input){
-  if(input.toLowerCase() != "gender" && input.toLowerCase() != "dob" && input.toLowerCase() != "eye color" && input.toLowerCase() != "parents" && input.toLowerCase() != "occupation" && input.toLowerCase() != "height" && input.toLowerCase() != "weight" && input.toLowerCase() != "spouse" && input.toLowerCase() != "quit"){
+  if(input.toLowerCase() != "gender" && input.toLowerCase() != "dob" && input.toLowerCase() != "eye color" && input.toLowerCase() != "parents" && input.toLowerCase() != "occupation" && input.toLowerCase() != "height" && input.toLowerCase() != "weight" && input.toLowerCase() != "spouse" && input.toLowerCase() != "quit" && input.toLowerCase() != "restart"){
     alert("Invalid input. Please try again.");
   }
   return input.toLowerCase() == "gender" || input.toLowerCase() == "dob" || input.toLowerCase() == "eye color" || input.toLowerCase() == "parents" || input.toLowerCase() == "occupation" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "spouse" || input.toLowerCase() == "quit";
